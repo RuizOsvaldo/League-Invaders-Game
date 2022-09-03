@@ -1,58 +1,40 @@
 package LeagueInvaders;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import java.awt.Color;
-public class Rocketship extends GameObject{
+public class Projectile extends GameObject {
 	
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 
-	Rocketship(int x, int y, int width, int height){
+	Projectile(int x, int y, int width, int height) {
+		// TODO Auto-generated constructor stub
 		super(x, y, width, height);
 		speed = 10;
 		
 		if (needImage) {
-		    loadImage ("rocket.png");
+		    loadImage ("bullet.png");
 		}
-		
-	
-	}
-	
-	void draw(Graphics g) {
-        
-        if (gotImage) {
-        	g.drawImage(image, x, y, width, height, null);
-        } else {
-        	g.setColor(Color.BLUE);
-        	g.fillRect(x, y, width, height);
-        }
-        
-	}
-	
-	void up() {
-		y-=speed;
-	}
-	
-	void down() {
-		y+=speed;
 	}
 
-	void right() {
-		x+=speed;
+	public void update() {
+		y-=speed;
+		super.update();
 	}
 	
-	void left() {
-		x-=speed;
+	public void draw(Graphics g) {
+		if (gotImage) {
+			g.drawImage(image, x, y, width, height, null);
+		} else {
+			g.setColor(Color.YELLOW);
+			g.fillRect(x, y, width, height);
+		}
 	}
-	
-	public Projectile getProjectile() {
-        return new Projectile(x+width/2, y, 10, 10);
-	} 
 	
 	void loadImage(String imageFile) {
 	    if (needImage) {
@@ -65,5 +47,4 @@ public class Rocketship extends GameObject{
 	        needImage = false;
 	    }
 	}
-	
 }
